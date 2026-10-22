@@ -45,8 +45,9 @@ scope. What's next is in `TODO.md`.
 - SwiftUI never restores the window with macOS's default "Close windows when quitting an
   application" setting, and resizes it on launch itself (to 900×450 without `.defaultSize`).
   `WindowBehavior` sets a frame autosave name one task after it gets its window, so the saved
-  frame lands after SwiftUI's sizing. `defaultWindowPlacement` only applies before there's
-  a saved frame.
+  frame lands after SwiftUI's sizing. The window stays transparent until then, or it flashes
+  at the default placement first. `defaultWindowPlacement` only applies before there's a
+  saved frame.
 - Camera access: `ENABLE_RESOURCE_ACCESS_CAMERA` (sandbox entitlement) and
   `INFOPLIST_KEY_NSCameraUsageDescription` in build settings.
 

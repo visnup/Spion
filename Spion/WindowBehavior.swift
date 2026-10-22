@@ -27,8 +27,13 @@ private final class WindowBehaviorView: NSView {
     override func viewDidMoveToWindow() {
         guard let window else { return }
         window.collectionBehavior.insert(.canJoinAllSpaces)
-        // after SwiftUI's own initial sizing, which would override the restored frame
-        Task { window.setFrameAutosaveName("Spion") }
+        // after SwiftUI's own initial sizing, which would override the restored frame; hidden
+        // until then, or it shows at the default placement first
+        window.alphaValue = 0
+        Task {
+            window.setFrameAutosaveName("Spion")
+            window.alphaValue = 1
+        }
     }
 
     override func mouseMoved(with event: NSEvent) {
