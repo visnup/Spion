@@ -2,7 +2,6 @@ import SwiftUI
 
 /// Fills the window and puts back what `.windowStyle(.plain)`'s borderless window lacks
 /// and SwiftUI has no API for:
-/// - it isn't resizable, so this inserts `.resizable`
 /// - it can't become key, so cursor rects and `.pointerStyle` never apply; an always-active
 ///   tracking area sets the resize cursors over the margin instead
 /// - SwiftUI only restores windows when macOS's "Close windows when quitting an application"
@@ -27,7 +26,6 @@ private final class WindowBehaviorView: NSView {
 
     override func viewDidMoveToWindow() {
         guard let window else { return }
-        window.styleMask.insert(.resizable)
         window.collectionBehavior.insert(.canJoinAllSpaces)
         // after SwiftUI's own initial sizing, which would override the restored frame
         Task { window.setFrameAutosaveName("Spion") }

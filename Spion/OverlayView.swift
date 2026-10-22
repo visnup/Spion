@@ -18,11 +18,12 @@ struct OverlayView: View {
             .clipShape(shape)
             .contentShape(shape)
             .gesture(WindowDragGesture())
-            .allowsWindowActivationEvents(true)
+            .allowsWindowActivationEvents()
             .padding(Self.margin)
             .background(.black.opacity(hovering ? 0.3 : 0), in: .rect(cornerRadius: Self.cornerRadius + Self.margin))
             .background(.black.opacity(0.01)) // fully transparent pixels click through the window
             .background(WindowBehavior().allowsHitTesting(false))
+            .windowResizeBehavior(.enabled)
             .onHover { hovering = $0 }
             .animation(.default, value: hovering)
             .frame(minWidth: 90, minHeight: 90)

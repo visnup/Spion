@@ -27,10 +27,11 @@ scope. What's next is in `TODO.md`.
   It's compiled by the Resources build phase, so keep that phase even when it looks empty.
 - Sources are a file-system-synchronized group, so new files in `Spion/` join the target without
   editing `project.pbxproj`.
-- The `.plain` window is borderless, and `WindowBehavior` works around what that costs:
-  - It isn't resizable (style mask `0`), so the view inserts `.resizable`.
-  - SwiftUI has no scene modifier for Spaces, so `collectionBehavior` gets `.canJoinAllSpaces`.
-    It doesn't show over other apps' full-screen Spaces, and `.fullScreenAuxiliary` doesn't
+- The `.plain` window is borderless, so its style mask is `0`. `.windowResizeBehavior(.enabled)`
+  on the overlay inserts `.resizable` (checked on macOS 27.0, 2026-10-22). `WindowBehavior` works
+  around the rest of what borderless costs:
+  - SwiftUI has no scene modifier for Spaces (none in the macOS 27.0 SDK either), so
+    `collectionBehavior` gets `.canJoinAllSpaces`. It doesn't show over other apps' full-screen Spaces, and `.fullScreenAuxiliary` doesn't
     change that. Per Apple DTS that takes an `.accessory` activation policy (no Dock icon or
     menu bar) plus a non-activating `NSPanel`.
   - It can't become key, so `.pointerStyle` and cursor rects never show. An `.activeAlways`
